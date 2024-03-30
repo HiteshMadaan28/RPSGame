@@ -11,11 +11,22 @@ struct ContentView: View {
     
     var elements=["Rock","Paper","Scissor"]
     @State private var selected="Rock"
+    @State private var random=Int.random(in: 0..<3)
+    
+    
+    
     
     func tap(_ e:String){
         
         selected=e
         
+    }
+    func check(){
+        random=Int.random(in: 0..<3)
+        
+        if(selected==elements[random]){
+            print("You won")
+        }
     }
     
     
@@ -49,7 +60,7 @@ struct ContentView: View {
                 }
                 Spacer()
                 Button("Click"){
-                    
+                    check()
                 }
             }
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,maxHeight: 400)
