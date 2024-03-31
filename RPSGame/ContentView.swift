@@ -27,6 +27,9 @@ struct ContentView: View {
         if(selected==elements[random]){
             print("You won")
         }
+        else{
+            print("LOOSSeee")
+        }
     }
     
     
@@ -54,6 +57,14 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                     .padding(40)
+                    
+                    Picker("Computer element",selection: $random){
+                        ForEach(elements,id: \.self){
+                            Text($0)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(20)
                     
                     
                     Spacer()
