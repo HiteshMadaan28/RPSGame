@@ -25,7 +25,7 @@ struct ContentView: View {
         random=Int.random(in: 0..<3)
         
         if(selected==elements[random]){
-            print("You won")
+            print("Tie")
         }
         else{
             print("LOOSSeee")
