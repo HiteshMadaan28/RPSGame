@@ -25,10 +25,34 @@ struct ContentView: View {
         random=Int.random(in: 0..<3)
         
         if(selected==elements[random]){
-            print("Tie")
+            print("Tie \(selected)-\(elements[random])")
+        }
+        else if(selected=="Rock"&&elements[random]=="Paper")
+        {
+            print("Loose")
+        }
+        else if(selected=="Rock"&&elements[random]=="Scissor")
+        {
+            print("Win")
+        }
+        else if(selected=="Paper"&&elements[random]=="Scissor")
+        {
+            print("Loose")
+        }
+        else if(selected=="Paper"&&elements[random]=="Rock")
+        {
+            print("Win")
+        }
+        else if(selected=="Scissor"&&elements[random]=="Rock")
+        {
+            print("Loose")
+        }
+        else if(selected=="Scissor"&&elements[random]=="Paper")
+        {
+            print("Win")
         }
         else{
-            print("LOOSSeee")
+            print("Loose....")
         }
     }
     
