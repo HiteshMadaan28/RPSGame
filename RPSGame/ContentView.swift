@@ -88,7 +88,7 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    .padding(20)
+                    .padding(40)
                     
                     
                     Spacer()
