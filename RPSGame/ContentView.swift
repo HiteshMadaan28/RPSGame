@@ -11,10 +11,9 @@ struct ContentView: View {
     
     var elements=["Rock","Paper","Scissor"]
     @State private var selected="Rock"
-    @State private var random=Int.random(in: 0..<3)
-    
-    
-    
+    @State private var random=1
+    @State private var computed=""
+   
     
     func tap(_ e:String){
         
@@ -23,6 +22,9 @@ struct ContentView: View {
     }
     func check(){
         random=Int.random(in: 0..<3)
+        let random2=Int.random(in: 0..<3)
+        computed=elements[random]
+        selected=elements[random2]
         
         if(selected==elements[random]){
             print("Tie \(selected)-\(elements[random])")
@@ -77,7 +79,8 @@ struct ContentView: View {
                     .pickerStyle(.segmented)
                     .padding(40)
                     
-                    Picker("Computer element",selection: $random){
+                    
+                    Picker("Computer element",selection: $computed){
                         ForEach(elements,id: \.self){
                             Text($0)
                         }
