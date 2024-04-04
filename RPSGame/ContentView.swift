@@ -69,12 +69,7 @@ struct ContentView: View {
                     
                     Picker("Select the Elemets",selection: $selected){
                         ForEach(elements,id: \.self){ e in
-                            //                        Button{
-                            //                            tap(e)
-                            //
-                            //                        }label: {
-                            //                            Text(e)
-                            //                        }
+                            
                             Text(e)
                             
                         }
