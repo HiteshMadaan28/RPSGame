@@ -13,9 +13,18 @@ struct ContentView: View {
     @State private var selected=""
     @State private var random=1
     @State private var random2=1
+    @State private var score_user=0
+    @State private var score_computer=0
+    @State private var winAlert=false
+    @State private var winner=""
 
     @State private var computed=""
    
+    func re(){
+        score_user=0
+        score_computer=0
+    }
+    
     
     func tap(_ e:String){
         
@@ -29,6 +38,8 @@ struct ContentView: View {
     }
     func check(){
         
+        
+        
         random=Int.random(in: 0..<3)
         computed=elements[random]
         selected=elements[random2]
@@ -39,30 +50,49 @@ struct ContentView: View {
         else if(selected=="Rock"&&elements[random]=="Paper")
         {
             print("Loose")
+            score_computer = score_computer + 1
+            
         }
         else if(selected=="Rock"&&elements[random]=="Scissors")
         {
             print("Win")
+            score_user = score_user + 1
         }
         else if(selected=="Paper"&&elements[random]=="Scissors")
         {
             print("Loose")
+            score_computer = score_computer + 1
         }
         else if(selected=="Paper"&&elements[random]=="Rock")
         {
             print("Win")
+            score_user = score_user + 1
         }
         else if(selected=="Scissors"&&elements[random]=="Rock")
         {
             print("Loose")
+            score_computer = score_computer + 1
         }
         else if(selected=="Scissors"&&elements[random]=="Paper")
         {
             print("Win")
+            score_user = score_user + 1
         }
         else{
             print("Loose....")
         }
+        
+        if(score_user==3 || score_computer==3){
+            if(score_user==3){
+                winner="User"
+            }
+            if(score_computer==3){
+                winner="Computer"
+            }
+            winAlert=true
+        }
+        
+        
     }
     
     
@@ -70,71 +100,99 @@ struct ContentView: View {
     var body: some View {
         NavigationStack{
             
-            VStack{
+            ZStack{
+                
+                LinearGradient(colors: [.yellow , .green], startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+                
                 VStack{
-                    
-                    Text("Select Your Element")
-                        .font(.largeTitle)
-                    
-                    
-//                    Picker("Select the Elemets",selection: $selected){
-//                        ForEach(elements,id: \.self){ e in
-//                            
-//                            Text(e)
-//                            
-//                        }
-//                    }
-//                    .pickerStyle(.segmented)
-//                    .padding(40)
-                    
-                    HStack{
-                        ForEach(0..<3){n in
-                            Button{
-                                
-                               select(n)
-                                
-                            }label: {
-                                Image(elements[n])
-                                    .resizable()
-                                    .frame(width: 100,height: 150)
+                    VStack{
+                        
+                        Text("Select Your Element")
+                            .font(.largeTitle)
+                            .bold()
+                            
+                            
+                        
+                        
+                        //                    Picker("Select the Elemets",selection: $selected){
+                        //                        ForEach(elements,id: \.self){ e in
+                        //
+                        //                            Text(e)
+                        //
+                        //                        }
+                        //                    }
+                        //                    .pickerStyle(.segmented)
+                        //                    .padding(40)
+                        
+                        HStack{
+                            ForEach(0..<3){n in
+                                Button{
+                                    
+                                    select(n)
+                                    
+                                }label: {
+                                    Image(elements[n])
+                                        .resizable()
+                                        .frame(width: 100,height: 100)
+                                }
                             }
                         }
+                        
+                        
+                        Text("Results").font(.title)
+                        HStack{
+                            Image(elements[random2])
+                                .resizable()
+                                .frame(width: 100,height: 100)
+                            
+                            Text("Vs")
+                            
+                            Image(elements[random])
+                                .resizable()
+                                .frame(width: 100,height: 100)
+                            
+                        }
+                        //                    Picker("Computer element",selection: $computed){
+                        //                        ForEach(elements,id: \.self){
+                        //                            Text($0)
+                        //                        }
+                        //                    }
+                        //                    .pickerStyle(.segmented)
+                        //                    .padding(40)
+                        
+                        
+                        
                     }
-                    .frame(maxWidth: 450,maxHeight: 450)
-                    .padding(40)
                     
-                    Spacer()
                     
-                    Text("Results")
                     HStack{
-                        Image(elements[random2])
-                            .resizable()
-                            .frame(width: 100,height: 100)
+                        Text("\(score_user)")
                         
                         Text("Vs")
                         
-                        Image(elements[random])
-                            .resizable()
-                            .frame(width: 100,height: 100)
-                        
+                        Text("\(score_computer)")
                     }
-//                    Picker("Computer element",selection: $computed){
-//                        ForEach(elements,id: \.self){
-//                            Text($0)
-//                        }
-//                    }
-//                    .pickerStyle(.segmented)
-//                    .padding(40)
                     
                     
-                    Spacer()
+                    
+                    
+                }
+                .frame(maxWidth: 350,maxHeight: 450)
+                .background(.regularMaterial)
+                .clipShape(.rect(cornerRadius: 20))
+                
+                .alert("The Game is Finished",isPresented: $winAlert){
+                    
+                    Button("Restart",action: re)
+                    
+                }message:{
+                    Text("Winner : \(winner)")
+                    
                 }
                 Spacer()
                 
             }
-            .frame(maxWidth: 350,maxHeight: 500)
-            
-            
             
             .navigationTitle("Rock Paper Scissors")
             
