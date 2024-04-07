@@ -23,6 +23,8 @@ struct ContentView: View {
     func re(){
         score_user=0
         score_computer=0
+        random=0
+        random2=0
     }
     
     
@@ -112,19 +114,6 @@ struct ContentView: View {
                             .font(.largeTitle)
                             .bold()
                             
-                            
-                        
-                        
-                        //                    Picker("Select the Elemets",selection: $selected){
-                        //                        ForEach(elements,id: \.self){ e in
-                        //
-                        //                            Text(e)
-                        //
-                        //                        }
-                        //                    }
-                        //                    .pickerStyle(.segmented)
-                        //                    .padding(40)
-                        
                         HStack{
                             ForEach(0..<3){n in
                                 Button{
@@ -153,13 +142,6 @@ struct ContentView: View {
                                 .frame(width: 100,height: 100)
                             
                         }
-                        //                    Picker("Computer element",selection: $computed){
-                        //                        ForEach(elements,id: \.self){
-                        //                            Text($0)
-                        //                        }
-                        //                    }
-                        //                    .pickerStyle(.segmented)
-                        //                    .padding(40)
                         
                         
                         
